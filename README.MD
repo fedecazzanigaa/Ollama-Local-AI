@@ -5,28 +5,97 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-yellow)
 ![License](https://img.shields.io/badge/License-MIT-red)
 
-Un chatbot local con interfaz estilo DeepSeek que corre completamente en tu máquina usando Ollama. ¡Sin necesidad de internet! Soporta carga de PDFs y múltiples modelos de IA.
+A local chatbot with a DeepSeek-style interface that runs completely on your machine using Ollama. No internet required! Supports PDF uploads and multiple AI models.
 
-## ✨ Características
+## ✨ Features
 
-- 🤖 **Chat local** con modelos de DeepSeek (o cualquier modelo de Ollama)
-- 📄 **Soporte PDF** - Carga documentos y haz preguntas sobre su contenido
-- 💾 **Historial persistente** - Todas las conversaciones se guardan automáticamente
-- 🎨 **Interfaz estilo DeepSeek** - Moderna, responsive y fácil de usar
-- 🔄 **Múltiples modelos** - Cambia entre diferentes modelos de IA en tiempo real
-- 🔒 **100% privado** - Todo corre en tu máquina, cero dependencias externas
-- 📱 **Responsive** - Funciona en desktop, tablet y móvil
+- 🤖 **Local chat** with DeepSeek models (or any Ollama model)
+- 📄 **PDF support** - Upload documents and ask questions about their content
+- 💾 **Persistent history** - All conversations are saved automatically
+- 🎨 **DeepSeek-style interface** - Modern, responsive and easy to use
+- 🔄 **Multiple models** - Switch between different AI models in real time
+- 🔒 **100% private** - Everything runs on your machine, zero external dependencies
+- 📱 **Responsive** - Works on desktop, tablet and mobile
 
-## 📋 Requisitos previos
+## 📋 Prerequisites
 
-- **Python 3.10 o superior**
-- **Ollama** instalado en tu sistema
-- **Modelos de IA** descargados en Ollama (ej: deepseek-coder, deepseek-r1, etc.)
+- **Python 3.10 or higher**
+- **Ollama** installed on your system
+- **AI models** downloaded in Ollama (ej: deepseek-coder, deepseek-r1, etc.)
 
-## 🚀 Instalación paso a paso
+## 🚀 step by step installation
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/tu-usuario/deepseek-local-chat.git
 cd deepseek-local-chat
+
+### 2. Create a virtual environment (recommended)
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+
+### 3. Install dependencies
+
+pip install -r requirements.txt
+
+### 4. Install & set up Ollama
+
+# Windows
+Download Ollama from ollama.com
+Run the executable
+Open a terminal and run: ollama serve
+
+# Linux / Mac
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+
+### 5. Download local models
+
+Ollama support many models:
+
+# DeepSeek
+ollama pull deepseek-coder
+ollama pull deepseek-r1
+
+# Llama3
+ollama pull llama3
+
+# Embedding model (necessary for PDFs)
+ollama pull nomic-embed-text:latest
+
+### 6. Set up environment variables
+
+OLLAMA_BASE_URL=http://localhost:11434
+DEFAULT_MODEL=deepseek-coder:6.7b
+
+### 7. Run the application
+
+python app.py
+
+### 8. Open the chatbot in your browser at http://localhost:8000
+Ready!
+
+### Project structure
+
+deepseek-local-chat/
+├── app.py                 # Main Flask server
+├── requirements.txt       # Project dependencies
+├── .env                   # Environment variables (optional)
+├── README.md             # This file
+├── templates/
+│   └── index.html        # User interface
+├── static/
+│   ├── css/
+│   │   └── style.css     # Styles CSS
+│   └── js/
+│       └── chat.js       # Client logic
+├── conversations/        # Stores the conversation history automatically
+├── uploads/              # Temporary uploaded PDF files
+└── vector_stores/        # Vector database for PDFs
