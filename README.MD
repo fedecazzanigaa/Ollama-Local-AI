@@ -1,45 +1,82 @@
-# 🚀 DeepSeek Local Clone - Chatbot IA con soporte PDF
+# 🚀 Local AI Chatbot
 
-![DeepSeek Local](https://img.shields.io/badge/DeepSeek-Local-blue)
-![Ollama](https://img.shields.io/badge/Ollama-Supported-green)
+> A local AI chatbot that runs entirely on your machine using Ollama. Chat with local LLMs, analyze PDFs, and keep your data private.
+
 ![Python](https://img.shields.io/badge/Python-3.10+-yellow)
+![Ollama](https://img.shields.io/badge/Ollama-Supported-green)
 ![License](https://img.shields.io/badge/License-MIT-red)
 
-A local chatbot with a DeepSeek-style interface that runs completely on your machine using Ollama. No internet required! Supports PDF uploads and multiple AI models.
+---
+
+## 📸 Screenshots
+
+> Add screenshots here
+
+### Main Interface
+
+```text
+docs/images/main-chat.png
+```
+
+### PDF Analysis
+
+```text
+docs/images/pdf-analysis.png
+```
+
+---
 
 ## ✨ Features
 
-- 🤖 **Local chat** with DeepSeek models (or any Ollama model)
-- 📄 **PDF support** - Upload documents and ask questions about their content
-- 💾 **Persistent history** - All conversations are saved automatically
-- 🎨 **DeepSeek-style interface** - Modern, responsive and easy to use
-- 🔄 **Multiple models** - Switch between different AI models in real time
-- 🔒 **100% private** - Everything runs on your machine, zero external dependencies
-- 📱 **Responsive** - Works on desktop, tablet and mobile
+| Feature | Supported |
+|----------|----------|
+| Local AI Chat | ✅ |
+| PDF Analysis | ✅ |
+| Conversation History | ✅ |
+| Multiple Models | ✅ |
+| Offline Operation | ✅ |
+| Responsive UI | ✅ |
+| Privacy Focused | ✅ |
 
-## 📋 Prerequisites
+---
 
-- **Python 3.10 or higher**
-- **Ollama** installed on your system
-- **AI models** downloaded in Ollama (ej: deepseek-coder, deepseek-r1, etc.)
+## 🤔 Why This Project?
 
-## 🚀 step by step installation
+Many local AI chat applications are either:
+
+- Difficult to install
+- Resource-intensive
+- Focused only on chat
+- Missing document analysis capabilities
+
+This project aims to provide:
+
+- Simple installation
+- PDF document analysis
+- Persistent conversation history
+- Complete privacy
+- Support for multiple Ollama models
+- A modern and responsive interface
+
+---
+
+## 🚀 Quick Start
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/tu-usuario/deepseek-local-chat.git
+git clone https://github.com/your-username/deepseek-local-chat.git
 cd deepseek-local-chat
 ```
 
-### 2. Create a virtual environment (recommended)
+### 2. Create a virtual environment
 
 ```bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
 
-# Linux/Mac
+# Linux / macOS
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -50,38 +87,29 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Install & set up Ollama
+### 4. Install and start Ollama
 
 ```bash
-# Windows
-Download Ollama from ollama.com
-Run the executable
-Open a terminal and run: ollama serve
-
-# Linux / Mac
-curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
 ```
 
-### 5. Download local models
-
-Ollama support many models:
+### 5. Download models
 
 ```bash
 # DeepSeek
 ollama pull deepseek-coder
 ollama pull deepseek-r1
 
-# Llama3
+# Llama
 ollama pull llama3
 
-# Embedding model (necessary for PDFs)
+# Embeddings for PDF search
 ollama pull nomic-embed-text:latest
 ```
 
-### 6. Set up environment variables
+### 6. Configure environment variables
 
-```bash
+```env
 OLLAMA_BASE_URL=http://localhost:11434
 DEFAULT_MODEL=deepseek-coder:6.7b
 ```
@@ -92,146 +120,189 @@ DEFAULT_MODEL=deepseek-coder:6.7b
 python app.py
 ```
 
-### 8. Open the chatbot in your browser at http://localhost:8000
-Ready!
+### 8. Open your browser
 
-### Project structure
+```text
+http://localhost:8000
+```
 
+You're all set! 🎉
+
+---
+
+## 🏗️ Architecture
+
+```text
+User
+ │
+ ▼
+Flask Application
+ │
+ ├── Ollama (LLM Inference)
+ │
+ ├── PDF Processing
+ │
+ ├── ChromaDB (Vector Store)
+ │
+ └── Conversation Storage
+```
+
+---
+
+## 📂 Project Structure
+
+```text
 deepseek-local-chat/
-├── app.py                 # Main Flask server
-├── requirements.txt       # Project dependencies
-├── .env                   # Environment variables (optional)
-├── README.md             # This file
+├── app.py
+├── requirements.txt
+├── .env
+├── README.md
 ├── templates/
-│   └── index.html        # User interface
+│   └── index.html
 ├── static/
 │   ├── css/
-│   │   └── style.css     # Styles CSS
+│   │   └── style.css
 │   └── js/
-│       └── chat.js       # Client logic
-├── conversations/        # Stores the conversation history automatically
-├── uploads/              # Temporary uploaded PDF files
-└── vector_stores/        # Vector database for PDFs
+│       └── chat.js
+├── conversations/
+├── uploads/
+└── vector_stores/
+```
 
-🎯 How to use
+---
 
-Chat normally
-Type your message in the text area
+## 📄 PDF Workflow
 
-Press Enter or click the send button
+1. Click the 📎 attachment button.
+2. Upload a PDF document.
+3. Wait for processing to complete.
+4. Ask questions about the document.
+5. The system retrieves relevant content and generates answers using your local model.
 
-The model will respond in real time
+---
 
-Use with PDFs
-Click the 📎 (clip) icon next to the send button
+## 🔧 Configuration
 
-Select a PDF file
+### Change the default model
 
-Wait for it to process (you will see a confirmation message)
+```python
+DEFAULT_MODEL = "deepseek-r1:14b"
+```
 
-Ask questions about the PDF content
+### Change the application port
 
-The system will automatically use the PDF to answer
+```python
+app.run(debug=True, host="0.0.0.0", port=8080)
+```
 
-Change model
-In the left sidebar, expand the "AI Model" selector
+### Adjust generation parameters
 
-Select the model you prefer
-
-All new messages will use that model
-
-Manage conversations
-New chat: "New chat" button in the sidebar
-
-Load chat: Click on any conversation in the history
-
-Delete chat: Hover over a conversation and click on 🗑️
-
-Clear all: "Clear history" button at the end of the sidebar
-
-🛠️ Personalization
-Change default model
-Edit app.py:
-
-python
-MODELO_POR_DEFECTO = "deepseek-r1:14b"  # Change here
-Change port
-python
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)  # Change port
-Modify token limit
-In the chat() function of app.py:
-
-python
+```python
 payload = {
-    "model": modelo_actual,
-    "prompt": prompt_completo,
+    "model": current_model,
+    "prompt": full_prompt,
     "stream": False,
     "options": {
         "temperature": 0.7,
-        "max_tokens": 4000  # Increase or decrease as needed
+        "max_tokens": 4000
     }
 }
-📦 Main dependencies
-Package	Version	Usage
-Flask	2.3.3	Web server
-requests	2.31.0	Communication with Ollama
-PyPDF2	3.0.0	Text extraction from PDFs
-chromadb	0.4.22	Vector database
-sentence-transformers	2.2.2	Embeddings for semantic search
-🔧 Common troubleshooting
-❌ Error: "No module named 'xxx'"
-bash
+```
+
+---
+
+## 📦 Main Dependencies
+
+| Package | Version | Purpose |
+|----------|----------|----------|
+| Flask | 2.3.3 | Web server |
+| requests | 2.31.0 | Ollama communication |
+| PyPDF2 | 3.0.0 | PDF text extraction |
+| chromadb | 0.4.22 | Vector database |
+| sentence-transformers | 2.2.2 | Semantic embeddings |
+
+---
+
+## 🛠️ Troubleshooting
+
+### Module not found
+
+```bash
 pip install -r requirements.txt
-❌ Error: "Ollama no responde"
-Make sure Ollama is running:
+```
 
-bash
+### Ollama is not responding
+
+```bash
 ollama serve
-❌ Error al subir PDF: "No se pudo extraer texto"
-The PDF must have selectable text (not be a scanned image). For scanned PDFs, you will need to install OCR.
+```
 
-❌ The model does not appear in the selector
-Check the installed models:
+### Unable to extract text from PDF
 
-bash
+The PDF must contain selectable text. Scanned PDFs require OCR support.
+
+### Model not appearing in the selector
+
+```bash
 ollama list
-🌐 Acceso desde otra red (Tailscale)
-Install Tailscale
+```
 
-Log in on both computers
+---
 
-On the server PC, run: tailscale ip
+## 🌐 Remote Access (Tailscale)
 
-From the other PC: http://[TAILSCALE_IP]:8000
+1. Install Tailscale.
+2. Log in on both devices.
+3. On the server machine:
 
-More options in the network documentation.
+```bash
+tailscale ip
+```
 
-🤝 Contributions
-Contributions are welcome. Please:
+4. Open:
 
-Fork the project
+```text
+http://TAILSCALE_IP:8000
+```
 
-Create your branch (git checkout -b feature/AmazingFeature)
+---
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+## 🗺️ Roadmap
 
-Push a la rama (git push origin feature/AmazingFeature)
+- [x] Local chat
+- [x] PDF support
+- [x] Conversation history
+- [x] Multiple models
+- [ ] Streaming responses
+- [ ] Docker deployment
+- [ ] Voice input
+- [ ] Dark / Light themes
+- [ ] User authentication
 
-Open a Pull Request
+---
 
-📝 License
-Distributed under the MIT license. See LICENSE for more information.
+## 🤝 Contributing
 
-🙏 Acknowledgments
-Ollama - For making it possible to run LLMs locally
+Contributions are welcome.
 
-DeepSeek - For their incredible open-source models
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push the branch
+5. Open a Pull Request
 
-Flask - Lightweight and powerful web framework
+---
 
-📧 Contact
-Federico Cazzaniga - @fedecazzanigaa
+## 📝 License
 
+Distributed under the MIT License. See `LICENSE` for more information.
 
-⭐ If you liked this project, don't forget to give it a star on GitHub!
+---
+
+## 👨‍💻 Author
+
+GitHub: @fedecazzanigaa
+
+---
+
+⭐ If you found this project useful, consider giving it a star on GitHub!
