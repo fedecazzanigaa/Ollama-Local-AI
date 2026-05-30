@@ -30,9 +30,11 @@ A local chatbot with a DeepSeek-style interface that runs completely on your mac
 ```bash
 git clone https://github.com/tu-usuario/deepseek-local-chat.git
 cd deepseek-local-chat
+```
 
 ### 2. Create a virtual environment (recommended)
 
+```bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
@@ -40,13 +42,17 @@ venv\Scripts\activate
 # Linux/Mac
 python3 -m venv venv
 source venv/bin/activate
+```
 
 ### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Install & set up Ollama
 
+```bash
 # Windows
 Download Ollama from ollama.com
 Run the executable
@@ -55,11 +61,13 @@ Open a terminal and run: ollama serve
 # Linux / Mac
 curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
+```
 
 ### 5. Download local models
 
 Ollama support many models:
 
+```bash
 # DeepSeek
 ollama pull deepseek-coder
 ollama pull deepseek-r1
@@ -69,15 +77,20 @@ ollama pull llama3
 
 # Embedding model (necessary for PDFs)
 ollama pull nomic-embed-text:latest
+```
 
 ### 6. Set up environment variables
 
+```bash
 OLLAMA_BASE_URL=http://localhost:11434
 DEFAULT_MODEL=deepseek-coder:6.7b
+```
 
 ### 7. Run the application
 
+```bash
 python app.py
+```
 
 ### 8. Open the chatbot in your browser at http://localhost:8000
 Ready!
